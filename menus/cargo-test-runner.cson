@@ -1,0 +1,18 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Run Cargo tests': 'cargo-test-runner:run'
+      'Re-run last Cargo tests': 'cargo-test-runner:run-previous'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'cargo-test-runner'
+      'submenu': [
+        { 'label': 'Run tests', 'command': 'cargo-test-runner:run' },
+        { 'label': 'Re-run last tests', 'command': 'cargo-test-runner:run-previous'}
+      ]
+    ]
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "name": "cargo-test-runner",
+  "main": "./lib/cargo-test-runner",
+  "version": "0.0.0",
+  "description": "Run Cargo tests from within Atom",
+  "repository": "https://github.com/nguyenchr/atom-cargo-test-runner",
+  "license": "MIT",
+  "activationCommands": {
+    "atom-workspace": [
+      "cargo-test-runner:run",
+      "cargo-test-runner:run-previous"
+    ],
+    ".platform-darwin": [
+      "settings-view:open"
+    ],
+    ".platform-win32": [
+      "settings-view:open"
+    ]
+  },
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.7.1"
+  },
+  "dependencies": {
+    "ansi-html-stream": "0.0.3",
+    "jsesc": "~0.4.3",
+    "ps-tree": "0.0.3",
+    "atom-space-pen-views": "^2.0.3",
+    "lodash": "~3.0.1"
+  }
+}

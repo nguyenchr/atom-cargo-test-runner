@@ -1,0 +1,70 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/stylesheets/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+.cargo-test-runner {
+
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  min-height: @font-size + 2 * @component-padding;
+
+  .resize-handle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 10px;
+    cursor: row-resize;
+  }
+
+  .panel {
+
+    display: -webkit-flex;
+    -webkit-flex-grow: 1;
+    -webkit-flex-direction: column;
+    background-color: #181818;
+
+    margin: 0;
+
+    .close-icon {
+
+      padding: @component-icon-padding;
+
+      &:before {
+        font-family: 'Octicons Regular';
+        -webkit-font-smoothing: antialiased;
+        width: 12px;
+        content: "\f081";
+      }
+
+      &:hover {
+        color: #fff;
+      }
+
+    }
+
+    .heading {
+      flex-shrink: 0;
+      padding: @component-padding;
+      color: black;
+    }
+
+    .panel-body {
+      padding: 0;
+      overflow-y: scroll;
+    }
+
+  }
+
+  .results {
+    background-color: #181818;
+    color: #F8F8F8;
+    font-size: @font-size;
+
+    a {
+      color: #F8F8F8;
+    }
+  }
+
+}
