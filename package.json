@@ -1,7 +1,7 @@
 {
   "name": "cargo-test-runner",
   "main": "./lib/cargo-test-runner",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Run Cargo tests from within Atom",
   "repository": "https://github.com/nguyenchr/atom-cargo-test-runner",
   "license": "MIT",
