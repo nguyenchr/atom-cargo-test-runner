@@ -71,10 +71,10 @@ module.exports =
       atom.workspace.addBottomPanel item:resultView
 
     if atom.config.get 'cargo-test-runner.showContextInformation'
-      cargoBinary = atom.config.get 'cargo-test-runner.cargoBinaryPath'
-      resultView.addLine "Cargo binary:   #{cargoBinary}\n"
+      resultView.addLine "Cargo binary:   #{currentContext.cargoBinaryPath}\n"
       resultView.addLine "Root folder:    #{currentContext.root}\n"
       resultView.addLine "Test file:      #{currentContext.test}\n"
+      resultView.addLine "PATH:           #{currentContext.path}\n"
 
     editor = atom.workspace.getActivePaneItem()
     cargo  = new Cargo(currentContext)

@@ -14,7 +14,6 @@ STATS_MATCHER = /(\d+)\s+(failed|passed|ignored|measured)/g
 module.exports = class CargoWrapper extends events.EventEmitter
 
   constructor: (@context) ->
-    @cargoPath = atom.config.get 'cargo-test-runner.cargoBinaryPath'
     @options = atom.config.get 'cargo-test-runner.options'
     @resetStatistics()
 
@@ -33,11 +32,11 @@ module.exports = class CargoWrapper extends events.EventEmitter
     opts =
       cwd: @context.root
       env:
-        PATH: path.dirname(@cargoPath)
+        PATH: @context.path
         HOME: process.env.HOME
 
     @resetStatistics()
-    @cargo = spawn @cargoPath, flags, opts
+    @cargo = spawn @context.cargoBinaryPath, flags, opts
 
     if @textOnly
       @cargo.stdout.on 'data', (data) => @emit 'output', data.toString()
@@ -71,7 +70,6 @@ module.exports = class CargoWrapper extends events.EventEmitter
 
 getFileWithoutExtension = (path) ->
   path.substr(0, path.lastIndexOf('.'))
-
 
 killTree = (pid, signal, callback) ->
   signal = signal or 'SIGKILL'
