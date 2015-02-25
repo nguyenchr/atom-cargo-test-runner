@@ -17,7 +17,7 @@ exports.find = (editor) ->
     path: envPath
     cargoBinaryPath: cargoBinary
 
-getCompletePath = (context, cargoPath) ->
+getCompletePath = (cargoPath) ->
   (process.env.PATH or '').split(path.delimiter).concat(path.dirname(cargoPath)).join(path.delimiter)
 
 closestPackage = (folder) ->
