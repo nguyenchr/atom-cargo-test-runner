@@ -4,7 +4,7 @@
     {
       'label': 'Cargo Test Runner'
       'submenu': [
-        { label: 'Run Cargo tests', command: 'cargo-test-runner:run' }
+        { label: 'Run Cargo Tests', command: 'cargo-test-runner:run' }
         { label: 'Rerun Last Cargo Tests', command: 'cargo-test-runner:run-previous' }
       ]
     }
