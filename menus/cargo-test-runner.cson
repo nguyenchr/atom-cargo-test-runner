@@ -2,10 +2,10 @@
 'context-menu':
   'atom-text-editor, .overlayer': [
     {
-      'label': 'cargo-test-runner'
+      'label': 'Cargo Test Runner'
       'submenu': [
-        { label: 'Run Cargo tests', command: 'cargo-test-runner:run' }
-        { label: 'Re-run last Cargo tests', command: 'cargo-test-runner:run-previous' }
+        { label: 'Run Cargo Tests', command: 'cargo-test-runner:run' }
+        { label: 'Rerun Last Cargo Tests', command: 'cargo-test-runner:run-previous' }
       ]
     }
   ]
@@ -14,10 +14,10 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'cargo-test-runner'
+      'label': 'Cargo Test Runner'
       'submenu': [
-        { 'label': 'Run tests', 'command': 'cargo-test-runner:run' },
-        { 'label': 'Re-run last tests', 'command': 'cargo-test-runner:run-previous'}
+        { 'label': 'Run Tests', 'command': 'cargo-test-runner:run' },
+        { 'label': 'Rerun Last Tests', 'command': 'cargo-test-runner:run-previous'}
       ]
     ]
   }
