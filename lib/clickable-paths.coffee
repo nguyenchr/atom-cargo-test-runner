@@ -27,26 +27,24 @@ module.exports.open = (extendedPath) ->
   [filename,row,col] = parts.slice(1)
   return unless filename?
 
-  projectPath = atom.project?.getPath()
+  candidates = (path.resolve(projectPath,filename) for projectPath in atom.project?.getPaths())
 
-  if projectPath?
-    filename = path.resolve(projectPath,filename)
+  [full_filename, ...] = (file_path for file_path in candidates when fs.existsSync(file_path))
 
-  unless fs.existsSync(filename)
-    alert "File not found: #{filename}"
-    return
+  if full_filename?
+    atom.workspace.open(full_filename)
+    .then ->
+      return unless row?
 
-  atom.workspace.open(filename)
-  .then ->
-    return unless row?
+      # align coordinates 0-index-based
+      row = Math.max(row - 1, 0)
+      col = Math.max(~~col - 1, 0)
+      position = new Point(row, col)
 
-    # align coordinates 0-index-based
-    row = Math.max(row - 1, 0)
-    col = Math.max(~~col - 1, 0)
-    position = new Point(row, col)
+      editor = atom.workspace.getActiveTextEditor()
+      return unless editor?
 
-    editor = atom.workspace.getActiveTextEditor()
-    return unless editor?
-
-    editor.scrollToBufferPosition(position, center:true)
-    editor.setCursorBufferPosition(position)
+      editor.scrollToBufferPosition(position, center:true)
+      editor.setCursorBufferPosition(position)
+  else
+    alert "Could not file #{filename}. Ensure that one of your project folders is the location of your Cargo.toml file."
