@@ -6,8 +6,10 @@ escape = require 'jsesc'
 ansi   = require 'ansi-html-stream'
 psTree = require 'ps-tree'
 spawn  = require('child_process').spawn
+{CompositeDisposable} = require 'event-kit'
 
 clickablePaths = require './clickable-paths'
+errorHighlight = require './error-highlight'
 
 STATS_MATCHER = /(\d+)\s+(failed|passed|ignored|measured)/g
 
@@ -15,7 +17,11 @@ module.exports = class CargoWrapper extends events.EventEmitter
 
   constructor: (@context) ->
     @options = atom.config.get 'cargo-test-runner.options'
+    @active_highlights = new CompositeDisposable()
     @resetStatistics()
+
+  dispose: () ->
+    @active_highlights.dispose()
 
   stop: ->
     if @cargo?
@@ -36,6 +42,8 @@ module.exports = class CargoWrapper extends events.EventEmitter
         HOME: process.env.HOME
 
     @resetStatistics()
+    @active_highlights.dispose()
+    @active_highlights = new CompositeDisposable()
     @cargo = spawn @context.cargoBinaryPath, flags, opts
 
     if @textOnly
@@ -47,7 +55,10 @@ module.exports = class CargoWrapper extends events.EventEmitter
       @cargo.stderr.pipe stream
       stream.on 'data', (data) =>
         @parseStatistics data
-        @emit 'output', clickablePaths.link data.toString()
+        line = data.toString()
+        @emit 'output', clickablePaths.link line
+        highlight = errorHighlight.highlightMessages line
+        @active_highlights.add highlight if highlight?
 
     @cargo.on 'error', (err) =>
       @emit 'error', err

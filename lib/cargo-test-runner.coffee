@@ -77,6 +77,7 @@ module.exports =
       resultView.addLine "PATH:           #{currentContext.path}\n"
 
     editor = atom.workspace.getActivePaneItem()
+    cargo?.dispose()
     cargo  = new Cargo(currentContext)
 
     cargo.on 'success', -> resultView.success()

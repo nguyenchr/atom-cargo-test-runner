@@ -28,6 +28,7 @@
     "jsesc": "~0.4.3",
     "ps-tree": "0.0.3",
     "atom-space-pen-views": "^2.0.3",
-    "lodash": "~3.0.1"
+    "lodash": "~3.0.1",
+    "event-kit": "~2.0.0"
   }
 }
