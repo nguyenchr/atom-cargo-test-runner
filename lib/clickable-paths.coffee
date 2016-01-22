@@ -8,8 +8,9 @@ module.exports.link = (text) ->
   text?.replace(fileFinder.PATH_REGEX,'<a class="flink newFLink">$&</a>')
 
 module.exports.attachClickHandler = ->
-  $('.newFLink').on 'click', module.exports.clicked
-  .removeClass('.newFLink') # remove "new" marker
+  $('.newFLink')
+    .on 'click', module.exports.clicked
+    .removeClass('newFLink') # remove "new" marker
 
 
 module.exports.clicked = ->
