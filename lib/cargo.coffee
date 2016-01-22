@@ -21,6 +21,7 @@ module.exports = class CargoWrapper extends events.EventEmitter
     @resetStatistics()
 
   dispose: () ->
+    @stop()
     @active_highlights.dispose()
 
   stop: ->
