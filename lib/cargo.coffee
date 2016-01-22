@@ -55,10 +55,10 @@ module.exports = class CargoWrapper extends events.EventEmitter
       @cargo.stderr.pipe stream
       stream.on 'data', (data) =>
         @parseStatistics data
-        line = data.toString()
-        @emit 'output', clickablePaths.link line
-        highlight = errorHighlight.highlightMessages line
-        @active_highlights.add highlight if highlight?
+        data = data.toString()
+        @emit 'output', clickablePaths.link data
+        highlights = errorHighlight.highlightMessages data
+        @active_highlights.add highlight for highlight in highlights
 
     @cargo.on 'error', (err) =>
       @emit 'error', err

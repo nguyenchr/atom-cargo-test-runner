@@ -3,6 +3,7 @@ path    = require 'path'
 {Point, Range} = require 'atom'
 
 PATH_REGEX = /((?:\w:)?[^:\s\(\)]+):(\d+):(\d+):(\s+(\d+):(\d+))?/g
+PATH_WITH_REMAINING_REGEX = new RegExp(PATH_REGEX.source + /(.+?)$/.source, "mg")
 
 convertToPosition = (row, col) ->
   row = Math.max(row - 1, 0)
@@ -13,9 +14,20 @@ module.exports.PATH_REGEX = PATH_REGEX
 
 module.exports.fileLocationForLine = (line) ->
   return null unless line?
-  parts = PATH_REGEX.exec(line)
+  parts = PATH_WITH_REMAINING_REGEX.exec(line)
   return null unless parts?
-  [filename,row,col, ..., end_row, end_col] = parts.slice(1)
+  handle_match(parts)
+
+module.exports.fileLocationsForLines = (text) ->
+  return null unless text?
+  locations = []
+  while parts = PATH_WITH_REMAINING_REGEX.exec(text)
+    location = handle_match(parts)
+    locations.push location if location?
+  locations
+
+handle_match = (parts) ->
+  [filename,row,col, ..., end_row, end_col, remaining] = parts.slice(1)
   return null unless filename?
 
   candidates = (path.resolve(projectPath,filename) for projectPath in atom.project?.getPaths())
@@ -29,4 +41,4 @@ module.exports.fileLocationForLine = (line) ->
     else
       null
 
-  [full_filename, start_position, end_position]
+  [full_filename, start_position, end_position, remaining]

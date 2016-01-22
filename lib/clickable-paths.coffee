@@ -4,8 +4,8 @@ path    = require 'path'
 {$}     = require 'atom-space-pen-views'
 fileFinder = require './file-finder'
 
-module.exports.link = (line) ->
-  line?.replace(fileFinder.PATH_REGEX,'<a class="flink newFLink">$&</a>')
+module.exports.link = (text) ->
+  text?.replace(fileFinder.PATH_REGEX,'<a class="flink newFLink">$&</a>')
 
 module.exports.attachClickHandler = ->
   $('.newFLink').on 'click', module.exports.clicked
