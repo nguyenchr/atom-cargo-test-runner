@@ -24,7 +24,7 @@ module.exports = class CargoWrapper extends events.EventEmitter
 
   run: ->
 
-    flags = ['test', getFileWithoutExtension(@context.test)]
+    flags = ['test']
 
     if @options
       Array::push.apply flags, @options.split ' '
