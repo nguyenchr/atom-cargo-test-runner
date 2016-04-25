@@ -40,7 +40,7 @@ module.exports =
 
 
   deactivate: ->
-    if cargo then cargo.stop()
+    if cargo then cargo.dispose()
     @subscriptions.dispose()
     resultView.detach()
     resultView = null
@@ -49,7 +49,7 @@ module.exports =
     resultView.serialize()
 
   close: ->
-    if cargo then cargo.stop()
+    if cargo then cargo.dispose()
     resultView.detach()
 
   run: ->
@@ -77,6 +77,7 @@ module.exports =
       resultView.addLine "PATH:           #{currentContext.path}\n"
 
     editor = atom.workspace.getActivePaneItem()
+    cargo?.dispose()
     cargo  = new Cargo(currentContext)
 
     cargo.on 'success', -> resultView.success()
