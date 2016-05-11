@@ -1,3 +1,7 @@
+:warning: Looking for maintainers :warning:
+
+Currently not working on anything rust related so looking for people to contribute to this package
+
 # Atom : Cargo test runner
 
 [![License](http://img.shields.io/badge/license-MIT-yellow.svg?style=flat)](https://github.com/nguyenchr/atom-cargo-test-runner/blob/master/LICENSE.md)
